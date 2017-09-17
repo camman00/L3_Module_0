@@ -1,6 +1,21 @@
 package IntroToHashMaps;
 
-public class LogSearch {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+public class LogSearch implements ActionListener {
+	private HashMap<Integer,String> hashTag = new HashMap<Integer,String>();
+	private JFrame jFrame;
+	private JPanel jPanel;
+	private JButton jButton1;
+	private JButton jButton2;
+	private JButton jButton3;
+	private JButton jButton4;
   /* 
 	 * Crate a HashMap of Integers for the keys and Strings for the values.
 	 * Create a GUI with three buttons. 
@@ -28,4 +43,47 @@ public class LogSearch {
 	 * 				is not in the list. 
 	 *
 	 * */
+	public static void main(String[] args) {
+		LogSearch logSearch = new LogSearch();
+	}
+	public LogSearch() {
+		jFrame = new JFrame();
+		jPanel = new JPanel();
+		jFrame.add(jPanel);
+		jFrame.setVisible(true);
+		jButton1 = new JButton();
+		jButton2 = new JButton();
+		jButton3 = new JButton();
+		jButton4 = new JButton();
+		jButton1.setText("Add an entry!");
+		jButton2.setText("Search by entry!");
+		jButton3.setText("View list!");
+		jButton4.setText("Remove entry!");
+		jPanel.add(jButton1);
+		jPanel.add(jButton2);
+		jPanel.add(jButton3);
+		jPanel.add(jButton4);
+		jButton1.addActionListener(this);
+		jButton2.addActionListener(this);
+		jFrame.pack();
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == jButton1) {
+			int id = Integer.valueOf(JOptionPane.showInputDialog("Enter an id!"));
+			String name = JOptionPane.showInputDialog("Student name");
+			hashTag.put(id, name);
+		}
+		else if(e.getSource() == jButton2) {
+			int id = Integer.valueOf(JOptionPane.showInputDialog("Enter an id!"));
+			if(hashTag.containsKey(id)) {
+				JOptionPane.showMessageDialog(jButton2, hashTag.get(id));
+			}
+			else {
+				JOptionPane.showMessageDialog(jButton2, "Does not exist!");
+				
+			}
+		}
+	}
+
 }
