@@ -65,6 +65,8 @@ public class LogSearch implements ActionListener {
 		jPanel.add(jButton4);
 		jButton1.addActionListener(this);
 		jButton2.addActionListener(this);
+		jButton3.addActionListener(this);
+		jButton4.addActionListener(this);
 		jFrame.pack();
 	}
 	@Override
@@ -83,6 +85,24 @@ public class LogSearch implements ActionListener {
 				JOptionPane.showMessageDialog(jButton2, "Does not exist!");
 				
 			}
+		}
+		else if(e.getSource() == jButton3) {
+			String s = "";
+			for(int key : hashTag.keySet()) {
+				s += "ID: " + String.valueOf(key) + " " + "Name: " + hashTag.get(key) + "\n";
+			}
+			JOptionPane.showMessageDialog(jButton3, s);
+		}
+		else if(e.getSource() == jButton4) {
+			int idRemove = Integer.parseInt(JOptionPane.showInputDialog(null, "Id to remove?"));
+			if(hashTag.containsKey(idRemove)) {
+				hashTag.remove(idRemove);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Does not exist");
+			}
+			
+			
 		}
 	}
 

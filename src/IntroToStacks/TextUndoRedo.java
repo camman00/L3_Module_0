@@ -2,6 +2,7 @@ package IntroToStacks;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Stack;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +23,7 @@ public class TextUndoRedo implements KeyListener {
 	 * */
 	private JLabel jlabel;
 	private JFrame jframe;
+	Stack<String> stack = new Stack<String>();
 	public static void main(String[] args) {
 		TextUndoRedo tur = new TextUndoRedo();
 	}
@@ -48,8 +50,12 @@ public class TextUndoRedo implements KeyListener {
 			jlabel.setText(jlabel.getText() + Character.toString(e.getKeyChar()));
 			jframe.pack();
 		}
-		if(e.getKeyCode() == 8) {
+		if(e.getKeyCode() == 8 && jlabel.getText().length() > 1) {
+			stack.push((jlabel.getText().substring((jlabel.getText().length() - 2),jlabel.getText().length() - 1)));
 			jlabel.setText(jlabel.getText().substring(0, jlabel.getText().length() - 2));
+		}
+		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+			jlabel.setText(jlabel.getText().substring(0,jlabel.getText().length() - 1) + stack.pop().replaceAll(" ", ""));
 		}
 		System.out.println(e.getKeyCode() == 8);
 		
